@@ -1,11 +1,18 @@
 [
-  {"title":"Backend developer",
+      {"title":"Backend developer",
       "companyName":"NTTD DATA",
       "jobDescription":"We need a backEnd developer to join us early",
       "techSkills":["Node", "Express"],
       "companyField":"Software",
       "companyLocation":"Barcelona"},
-
+      
+      {"title":"Backend developer",
+      "companyName":"Orbit Data",
+      "jobDescription":"We need a backEnd developer to join us early",
+      "techSkills":["Node", "Express"],
+      "companyField":"Software",
+      "companyLocation":"Barcelona"},
+      
       {"title":"Frontend developer",
       "companyName":"Orbit Data",
       "jobDescription":"We need a frontEnd developer to join us early",
@@ -17,7 +24,7 @@
       "companyName":"SEAT:CODE",
       "jobDescription":"We need a fullStack developer to join us early",
       "techSkills":["Node", "Express", "HTML", "REACT", "CSS"],
-      "companyField":"Software",
+      "companyField":"cars",
       "companyLocation":"Madrid"}
 
 ]

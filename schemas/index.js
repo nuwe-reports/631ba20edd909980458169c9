@@ -17,6 +17,54 @@ const rootQuery = new GraphQLObjectType({
             resolve(parent,args){
                 return data
             }
+        },
+        findOffer:{
+            type: new GraphQLList(offerType),
+            args:{
+                title:{ type:GraphQLString },
+                companyName: { type:GraphQLString },
+                jobDescription: { type:GraphQLString },
+                techSkills: { type:GraphQLList(GraphQLString) }, 
+                companyField: { type:GraphQLString },
+                companyLocation: { type:GraphQLString },
+            },
+            resolve(parent,args){
+
+                let offer = [] 
+                
+                if(args.title != undefined){
+
+                    const offerTitle = args.title
+                    offer = data.filter(offers=>offers.title === offerTitle )
+
+                }else if(args.companyName != undefined){
+
+                    const offerCompanyName = args.companyName
+                    offer = data.filter(offers=>offers.companyName === offerCompanyName )
+
+                }else if(args.jobDescription != undefined){
+
+                    const offerJobDescription = args.jobDescription
+                    offer = data.filter(offers=>offers.jobDescription === offerJobDescription )
+
+                }else if(args.techSkills != undefined){
+
+                    const offerTechSkills = args.techSkills
+                    offer = data.filter(offers=>offers.techSkills === offerTechSkills )
+
+                }else if(args.companyField != undefined){
+
+                    const offerCompanyField = args.companyField
+                    offer = data.filter(offers=>offers.companyField === offerCompanyField )
+
+                }else if(args.companyLocation != undefined){
+
+                    const offerCompanyLocation = args.companyLocation
+                    offer = data.filter(offers=>offers.companyLocation === offerCompanyLocation )
+
+                }
+                return offer
+            }
         }
     }
 })
@@ -114,8 +162,6 @@ const mutation = new GraphQLObjectType({
                     offerToUpdate = data.map(offer=>offer.title == args.title?{...offer, 'companyLocation': valueLocation}:{...offer}) 
                     data = [...offerToUpdate]
                 }
-
-               
                 return args
                 
             }
