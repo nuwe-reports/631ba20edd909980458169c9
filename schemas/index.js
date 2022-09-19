@@ -43,14 +43,15 @@ const rootQuery = new GraphQLObjectType({
                     offer = data.filter(offers=>offers.companyName === offerCompanyName )
 
                 }else if(args.jobDescription != undefined){
-
+                    console.log(args)
                     const offerJobDescription = args.jobDescription
-                    offer = data.filter(offers=>offers.jobDescription === offerJobDescription )
+                    console.log(offerJobDescription)
+                    offer = data.filter(offers=>offers.jobDescription.includes(offerJobDescription) )
 
                 }else if(args.techSkills != undefined){
 
                     const offerTechSkills = args.techSkills
-                    offer = data.filter(offers=>offers.techSkills === offerTechSkills )
+                    offer = data.filter(offers=>offers.techSkills.includes(offerTechSkills))
 
                 }else if(args.companyField != undefined){
 
