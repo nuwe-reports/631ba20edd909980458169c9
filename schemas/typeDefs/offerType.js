@@ -1,5 +1,5 @@
 const graphql = require('graphql')
-const {GraphQLObjectType,GraphQLString,GraphQLList} = graphql
+const {GraphQLObjectType,GraphQLString,GraphQLList,GraphQLBoolean} = graphql
 
 const offerType = new GraphQLObjectType({
     name:"Offer",
@@ -11,6 +11,15 @@ const offerType = new GraphQLObjectType({
         companyField: { type:GraphQLString },
         companyLocation: { type:GraphQLString },
     })
+    
 })
 
-module.exports = offerType 
+const userType = new GraphQLObjectType({
+    name:"User",
+    fields:()=>({
+        email:{ type:GraphQLString },
+        suscribed:{ type:GraphQLBoolean}
+    })
+})
+
+module.exports = { offerType, userType }

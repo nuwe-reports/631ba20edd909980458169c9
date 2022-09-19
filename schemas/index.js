@@ -1,5 +1,6 @@
-const offerType = require("./typeDefs/offerType.js")
+const {offerType, userType} = require("./typeDefs/offerType.js")
 let data = require("../data")
+let userData = require("../usersData.json")
 const graphql = require("graphql");
 
 const {
@@ -164,10 +165,35 @@ const mutation = new GraphQLObjectType({
                     data = [...offerToUpdate]
                 }
                 return args
-                
             }
+        },
+        suscribeOfferService:{
+            type: userType,
+            args:{
+                email:{type: GraphQLString}
+            },
+            resolve(parent,args){
+               
+                userToUpdate = userData.map(user=>user.email === args.email?{...user, 'suscribed': true }:{...user})  
+                userData = [...userToUpdate]
+              
+                return args
+            }
+        },
+        unSuscribeOfferService:{
+            type:userType,
+            args:{
+                email:{type: GraphQLString}
+            },
+            resolve(parent,args){
+                
+                userToUpdate = userData.map(user=>user.email === args.email?{...user, 'suscribed': false }:{...user})  
+                userData = [...userToUpdate]
+                
+                return args
+            }
+        },
 
-        }
     }
 })
 
