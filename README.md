@@ -62,37 +62,37 @@ query{
 ```
 
 ### Create offer
-
+```sh
 mutation{
   createOffer(title:"",companyName:"",jobDescription:"",companyField:"",companyLocation:"", techSkills:[])
 }
-
+```
 ### Delete offer
-
+```sh
 mutation{
 	deleteOffer(title:"")
 }
-
+```
 ### Update offer
 
 You can update many arguments as you want
-
+```sh
 mutation{
   updateOffer(title:"",companyName:"",jobDescription:"",companyField:"",companyLocation:"", techSkills:[])
 }
-
+```
 ### Subscribe
-
+```sh
 mutation{
 	suscribeOfferService(email:"")
 }
-
+```
 ### Unsubscribe
-
+```sh
 mutation{
 	unSuscribeOfferService(email:"")
 }
-
+```
 ### How to Contribute to the Project
 
 Any contribution or help to improve this challenge is welcome.
