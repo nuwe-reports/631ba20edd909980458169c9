@@ -2,6 +2,7 @@ const {offerType, userType} = require("./typeDefs/offerType.js")
 let data = require("../data")
 let userData = require("../usersData.json")
 const graphql = require("graphql");
+const transporter = require("../config/email")
 
 const {
     GraphQLObjectType, 
@@ -176,8 +177,18 @@ const mutation = new GraphQLObjectType({
                
                 userToUpdate = userData.map(user=>user.email === args.email?{...user, 'suscribed': true }:{...user})  
                 userData = [...userToUpdate]
-              
-                return args
+
+                async function sendEmail(){
+
+                    await transporter.sendMail({
+                        from: "offers@gmail.com",
+                        to:  args.email,
+                        subject: 'suscribed to our newsLetter',
+                        html: `
+                        <b>Welcome to our newsLetter services !!!!</b>`
+                    })
+                }
+                sendEmail()
             }
         },
         unSuscribeOfferService:{
@@ -190,7 +201,17 @@ const mutation = new GraphQLObjectType({
                 userToUpdate = userData.map(user=>user.email === args.email?{...user, 'suscribed': false }:{...user})  
                 userData = [...userToUpdate]
                 
-                return args
+                async function sendEmailUn(){
+
+                    await transporter.sendMail({
+                        from: "offers@gmail.com",
+                        to:  args.email,
+                        subject: 'unSuscribed to our newsLetter',
+                        html: `
+                        <b>We hope to see you soon!</b>`
+                    })
+                }
+                sendEmailUn()
             }
         },
 
