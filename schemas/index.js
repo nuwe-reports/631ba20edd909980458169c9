@@ -3,6 +3,8 @@ let data = require("../data")
 let userData = require("../usersData.json")
 const graphql = require("graphql");
 
+const {transporter} = require('../config/mail.js');
+
 const {
     GraphQLObjectType, 
     GraphQLSchema, 
@@ -176,6 +178,17 @@ const mutation = new GraphQLObjectType({
                
                 userToUpdate = userData.map(user=>user.email === args.email?{...user, 'suscribed': true }:{...user})  
                 userData = [...userToUpdate]
+
+                sendConfirmEmail = async  () =>{
+                    await transporter.sendMail({
+                        from: "dani@gmail.com",
+                        to:  email,
+                        subject: 'subscribed done',
+                        html: `
+                        <b>Welcome to our offer newsLetter!.</b>`
+                    })
+                }
+                sendConfirmEmail()
               
                 return args
             }
@@ -189,6 +202,17 @@ const mutation = new GraphQLObjectType({
                 
                 userToUpdate = userData.map(user=>user.email === args.email?{...user, 'suscribed': false }:{...user})  
                 userData = [...userToUpdate]
+
+                sendUnsuscribeEmail = async  () =>{
+                    await transporter.sendMail({
+                        from: "dani@gmail.com",
+                        to:  email,
+                        subject: 'unSubscribed done',
+                        html: `
+                        <b>See you soon !.</b>`
+                    })
+                }
+                sendUnsuscribeEmail()
                 
                 return args
             }
