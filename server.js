@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const { isAuthenticated } = require('./midleware/jwt.middleware.js')
 
 const { graphqlHTTP } = require('express-graphql')
 const schema = require('./schemas/index.js')
@@ -14,7 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use(
-    "/graphql",isAuthenticated,
+    "/graphql",
     graphqlHTTP({
         schema,
         graphiql:true
